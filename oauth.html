@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Authorization — Visual Notes Publisher</title>
+<style>body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;line-height:1.6;color:#1f2937}
+code{display:block;padding:12px;background:#ecfdf5;border-radius:8px;word-break:break-all;font-size:15px}</style></head>
+<body>
+<h1>Visual Notes Publisher — authorization</h1>
+<p id="msg">Reading the authorization result…</p>
+<code id="code"></code>
+<p><small>This page only displays the one-time code returned by Pinterest. Nothing is sent anywhere.
+Copy it into the GitHub workflow "Pinterest : connexion" (field <em>code</em>). It expires after a few minutes.</small></p>
+<script>
+const q = new URLSearchParams(location.search);
+const code = q.get("code"), err = q.get("error");
+document.getElementById("msg").textContent = code ? "Authorization granted. One-time code:" :
+  (err ? "Authorization refused or failed: " + err : "No code in this URL.");
+document.getElementById("code").textContent = code || "";
+</script>
+</body></html>
